@@ -5,6 +5,8 @@ import { ref, onMounted, computed, watch } from "vue";
 // computed = things in order
 // watch = watch for changes in ref/updates local storage
 // v-model = implement a two-way binding for input elements??
+// v-for = a directive which is used to loop over data that is usually an array or object
+// using : for an attribute has a binding agent??
 
 const tasks = ref([]);
 const name = ref("");
@@ -27,6 +29,7 @@ const addTask = () => {
     content: userTitle.value,
     category: userCategory.value,
     done: false,
+    id: Date.now(),
     createdAt: new Date().getTime(),
   });
 };
@@ -109,7 +112,24 @@ onMounted(() => {
         <input type="submit" value="Add Task" />
       </form>
     </section>
-    {{ tasksOrder }}
+    <section>
+      <h3>Task List</h3>
+      <div class="list">
+        <div
+          v-for="task in taskOrder"
+          :key="task.id"
+          :class="`task-item ${task.done && 'done'}`"
+        >
+          <label>
+            <input type="checkbox" v-model="task.done" />
+            <div :class="`bubble ${task.category}`"></div>
+          </label>
+          <div class='content'>
+            <input type='text' v-model="task.content"/>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
