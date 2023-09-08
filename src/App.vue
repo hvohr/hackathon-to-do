@@ -42,6 +42,8 @@ watch(
   { deep: true }
 );
 
+console.log(userCategory.value)
+
 // deep looks through each induvidual array item/element
 // and if anything changes, deep will catch it)
 
@@ -116,7 +118,7 @@ onMounted(() => {
       <h3>Task List</h3>
       <div class="list">
         <div
-          v-for="task in taskOrder"
+          v-for="task in tasksOrder"
           :key="task.id"
           :class="`task-item ${task.done && 'done'}`"
         >
