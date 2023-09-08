@@ -18,6 +18,10 @@ const tasksOrder = computed(() =>
 );
 // ascending list by created time??
 
+const addTask = () => {
+  // insert things
+};
+
 watch(name, (newNameValue) => {
   localStorage.setItem("name", newNameValue);
 });
@@ -30,7 +34,7 @@ onMounted(() => {
 
 <template>
   <header>
-    <h1 class='website-title'>TaskMaster</h1>
+    <h1 class="website-title">TaskMaster</h1>
   </header>
   <main class="app">
     <section class="greeting">
@@ -41,6 +45,47 @@ onMounted(() => {
 
     <section>
       <h3>Create a New Task</h3>
+      <form @submit.prevent="addTask">
+        <h4>What's on your task list?</h4>
+        <input
+          type="text"
+          placeholder="e.g. walk the dog"
+          v-model="userTitle"
+        />
+        <h4>What degree of difficulty is this task?</h4>
+        <div class="difficulty-options">
+          <label>
+            <input
+              type="radio"
+              name="category"
+              value="easy"
+              v-model="userCategory"
+            />
+            <div class="bubble easy"></div>
+            <div>Easy</div>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="category"
+              value="medium"
+              v-model="userCategory"
+            />
+            <div class="bubble medium"></div>
+            <div>Medium</div>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="category"
+              value="hard"
+              v-model="userCategory"
+            />
+            <div class="bubble hard"></div>
+            <div>Hard</div>
+          </label>
+        </div>
+      </form>
     </section>
   </main>
 </template>
