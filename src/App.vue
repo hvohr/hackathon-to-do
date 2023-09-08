@@ -59,7 +59,7 @@ onMounted(() => {
 
 <template>
   <header>
-    <h1 class="website-title">TaskMaster</h1>
+    <h1 class="website-title">Vue To Do</h1>
   </header>
   <main class="app">
     <!-- <section class="greeting">
