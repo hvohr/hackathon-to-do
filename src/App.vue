@@ -174,6 +174,14 @@ label {
   align-items: center;
 }
 
+.task-list-container {
+  margin: 20px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
 h3 {
   font-size: 25px;
   text-align: center;
@@ -183,6 +191,7 @@ h3 {
 input[type="text"] {
   padding: 20px;
   font-size: 15px;
+  border-radius: 10px;
 }
 
 input[type="checkbox"] {
@@ -190,6 +199,7 @@ input[type="checkbox"] {
   width: 20px;
   outline: 2px solid rgb(0, 0, 0);
   margin-right: 15px;
+  cursor: pointer;
 }
 
 input[type="submit"],
@@ -197,6 +207,12 @@ input[type="submit"],
   font-size: 20px;
   background-color: #ffffff;
   border: double 3px black;
+  padding: 10px;
+    cursor: pointer;
+}
+
+input[type="submit"] {
+  margin: 20px;
 }
 
 .list-label {
@@ -251,6 +267,7 @@ input[type="radio"] {
   border: 2px solid black;
   border-radius: 50%;
   transform: translateY(-0.075em);
+  cursor: pointer;
 }
 input[type="radio"]:checked {
   background-color: rgb(12, 67, 12);
