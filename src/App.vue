@@ -32,6 +32,12 @@ const addTask = () => {
     id: Date.now(),
     createdAt: new Date().getTime(),
   });
+  userTitle.value = "";
+  userCategory.value = null;
+};
+
+const removeTask = (task) => {
+  tasks.value = tasks.value.filter((t) => t !== task);
 };
 
 watch(
@@ -42,7 +48,7 @@ watch(
   { deep: true }
 );
 
-console.log(userCategory.value)
+console.log(userCategory.value);
 
 // deep looks through each induvidual array item/element
 // and if anything changes, deep will catch it)
@@ -124,10 +130,14 @@ onMounted(() => {
         >
           <label>
             <input type="checkbox" v-model="task.done" />
-            <div :class="`bubble ${task.category}`"></div>
+            <p :class="`bubble ${task.category}`"></p>
+            {{ task.category }}
           </label>
-          <div class='content'>
-            <input type='text' v-model="task.content"/>
+          <div class="content">
+            <input type="text" v-model="task.content" />
+          </div>
+          <div class="actions">
+            <button class="delete" @click="removeTask(task)">Delete</button>
           </div>
         </div>
       </div>
@@ -139,7 +149,6 @@ onMounted(() => {
 header {
   text-align: center;
 }
-
 input[type="radio"] {
   appearance: none;
   padding: 10px;
@@ -151,5 +160,8 @@ input[type="radio"] {
 }
 input[type="radio"]:checked {
   background-color: rgb(12, 67, 12);
+}
+.bubble.easy {
+  background-color: rgb(242, 89, 1);
 }
 </style>
