@@ -10,17 +10,37 @@ const tasks = ref([]);
 const name = ref("");
 const userTitle = ref("");
 const userCategory = ref(null);
+// const emptyError = ref(false)
 
 const tasksOrder = computed(() =>
   tasks.value.sort((a, b) => {
-    return b.createdAt - a.createdAt;
+    return a.createdAt - b.createdAt;
   })
 );
 // ascending list by created time??
 
 const addTask = () => {
-  // insert things
+  if (userTitle.value.trim() === "" || userCategory.value === null) {
+    return;
+  }
+  tasks.value.push({
+    content: userTitle.value,
+    category: userCategory.value,
+    done: false,
+    createdAt: new Date().getTime(),
+  });
 };
+
+watch(
+  tasks,
+  (newTask) => {
+    localStorage.setItem("tasks", JSON.stringify(newTask));
+  },
+  { deep: true }
+);
+
+// deep looks through each induvidual array item/element
+// and if anything changes, deep will catch it)
 
 watch(name, (newNameValue) => {
   localStorage.setItem("name", newNameValue);
@@ -28,6 +48,7 @@ watch(name, (newNameValue) => {
 
 onMounted(() => {
   name.value = localStorage.getItem("name") || "";
+  tasks.value = JSON.parse(localStorage.getItem("tasks")) || [];
 });
 // set it so it stays on refresh??
 </script>
@@ -85,8 +106,10 @@ onMounted(() => {
             <div>Hard</div>
           </label>
         </div>
+        <input type="submit" value="Add Task" />
       </form>
     </section>
+    {{ tasksOrder }}
   </main>
 </template>
 
@@ -94,11 +117,17 @@ onMounted(() => {
 header {
   text-align: center;
 }
-/* input:not([type="radio"]):not([type="checkbox"]), button {
-	appearance: none;
-	border: none;
-	outline: none;
-	background: none;
-	cursor: initial;
-} */
+
+input[type="radio"] {
+  appearance: none;
+  padding: 10px;
+  background-color: #fff;
+  margin: 0;
+  border: 2px solid black;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+}
+input[type="radio"]:checked {
+  background-color: rgb(12, 67, 12);
+}
 </style>
